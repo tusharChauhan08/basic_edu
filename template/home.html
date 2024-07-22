@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="main-div">
+        <form method="POST">
+            <h2>Welcome! Signup Page</h2>
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" value="submit">
+        </form>
+    </div>
+    <div class="data-div">
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Email</td>
+                    <td>Mobile-no</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for items in data %}
+                    <tr>
+                        <td>{{items.name}}</td>
+                        <td>{{items.email}}</td>
+                        <td>{{items.mobile}}</td>
+                        <td>
+                            <a href="/delete/{{items.id}}">Delete</a>
+                            <a href="/update/{{items.id}}">Update</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
